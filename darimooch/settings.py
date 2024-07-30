@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'products',
     'carousel',
+    'categories',
 ]
 
 MIDDLEWARE = [
@@ -85,6 +86,14 @@ DATABASES = {
         'USER':'root',
         'PASSWORD':'',
         'PORT':'3306'
+
+        # 'NAME': 'yasirali_test',
+        # 'ENGINE': 'django.db.backends.mysql',
+        # 'HOST':'localhost',
+        # 'DATABASE':'yasirali_test',
+        # 'USER':'yasirali_test_admin',
+        # 'PASSWORD':'BIV.z,[&1{*)',
+        # 'PORT':'3306'
     }
 }
 
