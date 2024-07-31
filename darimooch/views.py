@@ -34,8 +34,26 @@ def home(request):
 
 
 
-def shop(request):
-    return render(request, 'shop.html')
+def shop(request, cat_id):
+    categories = Category.objects.all()
+    productsByCat = Products.objects.filter(cat_id_id = cat_id)
+    productsData = Paginator(productsByCat, 2)
+
+    if 'page' in request.GET:
+        page = request.GET['page']
+    else:
+        page = 1
+
+    products = productsData.get_page(page)
+
+    totalPages = [x+1 for x in range(productsData.num_pages)]
+
+    data = {
+        "categories":categories,
+        "productsByCat":products,
+        "totalPages":totalPages
+    }
+    return render(request, 'shop.html', data)
 
 
 

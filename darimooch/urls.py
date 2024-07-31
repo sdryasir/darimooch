@@ -32,6 +32,7 @@ urlpatterns = [
     path('login-user/', views.loginUser, name='login-user'),
     path('logout-user/', views.logoutUser, name='logout-user'),
     path('shop/', views.shop, name='shop'),
+    path('shop/<cat_id>', views.shop, name='shop'),
 ]
 
 if settings.DEBUG:

@@ -12,7 +12,7 @@
                         </div>
                         <ul>
                             {% for category in categories %}
-                                <li><a href="{% url 'shop' %}">{{category.title}}</a></li>
+                                <li><a href="{% url 'shop' %}{{category.id}}">{{category.title}}</a></li>
                             {% endfor %}
                         </ul>
                     </div>
@@ -62,7 +62,7 @@
                     {% for category in categories %}
                     <div class="col-lg-3">
                         <div class="categories__item set-bg" data-setbg="media/{{category.image}}">
-                            <h5><a href="#">{{category.title}}</a></h5>
+                            <h5><a href="{% url 'shop' %}{{category.id}}">{{category.title}}</a></h5>
                         </div>
                     </div>
                     {% endfor %}
