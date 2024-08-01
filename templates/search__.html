@@ -1,0 +1,22 @@
+{% load static %}
+{% include 'header.html' %}
+
+<main>
+    <h2>Search results</h2>
+    <div class="row">
+        {% for product in products %}
+                <div class="col-md-3">
+                    <div class="card">
+                        <img src="/media/{{product.image}}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                        <h5 class="card-title">{{product.title}}</h5>
+                        <p class="card-text">PKR.{{product.price}}</p>
+                        <a href="{% url 'products' product.id %}" class="btn btn-primary">Detail - {{product.id}}</a>
+                        </div>
+                    </div>
+                </div>
+        {% endfor %}
+    </div>
+</main>
+
+{% include 'footer.html' %}

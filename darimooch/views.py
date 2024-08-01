@@ -63,7 +63,6 @@ def aboutPage(request):
 
 
 def productDetail(request, id):
-    print(id)
     product = Products.objects.get(id__exact=id)
     print(product)
     data = {
@@ -74,8 +73,11 @@ def productDetail(request, id):
 def search(request):
     searchTerm = request.GET['search']
     products = Products.objects.filter(title__icontains=searchTerm)
+    categories = Category.objects.all()
     data = {
-        "products":products
+        "products":products,
+        "count":products.count(),
+        "categories":categories
     }
     return render(request, 'search.html', data)
 
