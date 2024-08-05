@@ -10,18 +10,6 @@ from django.contrib import messages
 def home(request):
     categories = Category.objects.all()
     productsData = Products.objects.all()
-    # productsData = Paginator(productsData, 2)
-
-    # if 'page' in request.GET:
-    #     page = request.GET['page']
-    # else:
-    #     page = 1
-
-    # products = productsData.get_page(page)
-
-    # totalPages = [x+1 for x in range(productsData.num_pages)]
-
-
     carousel = Carousel.objects.all()
 
     data = {
@@ -37,7 +25,7 @@ def home(request):
 def shop(request, cat_id):
     categories = Category.objects.all()
     productsByCat = Products.objects.filter(cat_id_id = cat_id)
-    productsData = Paginator(productsByCat, 2)
+    productsData = Paginator(productsByCat, 10)
 
     if 'page' in request.GET:
         page = request.GET['page']
@@ -48,10 +36,14 @@ def shop(request, cat_id):
 
     totalPages = [x+1 for x in range(productsData.num_pages)]
 
+    print("test test", products.number)
+
     data = {
         "categories":categories,
         "productsByCat":products,
-        "totalPages":totalPages
+        "totalPages":totalPages,
+        "currentPage":products.number,
+        "cat_id": cat_id
     }
     return render(request, 'shop.html', data)
 
