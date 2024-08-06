@@ -9,7 +9,7 @@ from django.contrib import messages
 
 def home(request):
     categories = Category.objects.all()
-    productsData = Products.objects.all()
+    productsData = Products.objects.all().order_by('-id')[:10]
     carousel = Carousel.objects.all()
 
     data = {
@@ -22,9 +22,13 @@ def home(request):
 
 
 
-def shop(request, cat_id):
+def shop(request, cat_id=None):
     categories = Category.objects.all()
-    productsByCat = Products.objects.filter(cat_id_id = cat_id)
+    if cat_id:
+        productsByCat = Products.objects.filter(cat_id_id = cat_id)
+    else:
+        productsByCat = Products.objects.all()
+
     productsData = Paginator(productsByCat, 10)
 
     if 'page' in request.GET:
@@ -78,7 +82,9 @@ def register(request):
     return render(request, 'register.html')
 
 def login(request):
-    # username = request.POST['username']
+    if request.user.is_authenticated:
+        return redirect('home')
+    
     return render(request, 'login.html')
 
 
@@ -111,6 +117,6 @@ def loginUser(request):
 
 def logoutUser(request):
     logout(request)
-    return render(request, 'login.html')
+    return redirect('home')
 
 

@@ -363,8 +363,9 @@
                         {% if products.has_previous %}
                             <a href="/shop/{{cat_id}}?page={{products.previous_page_number}}"><i class="fa fa-long-arrow-left"></i></a>
                         {% endif %}
+
                         {% for p in totalPages %}
-                            <a href="/shop/{{cat_id}}?page={{p}}" class="{% if currentPage == p %} active {% endif %}">{{p}}</a>
+                            <a href="/shop/{% if cat_id != None %} {{cat_id}} {% endif %}?page={{p}}" class="{% if currentPage == p %} active {% endif %}">{{p}}</a>
                         {% endfor %}
 
                         
