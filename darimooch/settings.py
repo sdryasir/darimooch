@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure--!o#^2_r_bpj689240dy!74ipz@=)1$^u+j!di!l09clz3=y#3
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+CART_SESSION_ID = 'cart'
 
 # Application definition
 
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'products',
     'carousel',
     'categories',
+    'cart',
 ]
 
 MIDDLEWARE = [
@@ -65,6 +66,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'cart.context_processor.cart_total_amount',
             ],
         },
     },

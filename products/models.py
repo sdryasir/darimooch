@@ -3,7 +3,7 @@ from categories.models import Category
 
 
 class Products(models.Model):
-    title = models.CharField(max_length=60)
+    name = models.CharField(max_length=60)
     description = models.TextField(null=True)
     price = models.IntegerField(null=True)
     stock = models.IntegerField(null=True)

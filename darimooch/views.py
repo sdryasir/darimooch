@@ -6,6 +6,47 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login as user_login, logout
 from django.core.paginator import Paginator
 from django.contrib import messages
+from cart.cart import Cart
+
+
+def cart_add(request, id):
+    cart = Cart(request)
+    product = Products.objects.get(id=id)
+    cart.add(product=product)
+    return redirect("home")
+
+
+def item_clear(request, id):
+    cart = Cart(request)
+    product = Products.objects.get(id=id)
+    cart.remove(product)
+    return redirect("cart_detail")
+
+
+def item_increment(request, id):
+    cart = Cart(request)
+    product = Products.objects.get(id=id)
+    cart.add(product=product)
+    return redirect("cart_detail")
+
+
+def item_decrement(request, id):
+    cart = Cart(request)
+    product = Products.objects.get(id=id)
+    cart.decrement(product=product)
+    return redirect("cart_detail")
+
+
+def cart_clear(request):
+    cart = Cart(request)
+    cart.clear()
+    return redirect("cart_detail")
+
+
+def cart_detail(request):
+    return render(request, 'cart_detail.html')
+
+
 
 def home(request):
     categories = Category.objects.all()
@@ -68,7 +109,7 @@ def productDetail(request, id):
 
 def search(request):
     searchTerm = request.GET['search']
-    products = Products.objects.filter(title__icontains=searchTerm)
+    products = Products.objects.filter(name__icontains=searchTerm)
     categories = Category.objects.all()
     data = {
         "products":products,

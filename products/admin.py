@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import Products
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['title', 'description', 'price', 'stock', 'weight', 'otherInfo', 'image','cat_id']
+    list_display = ['name', 'description', 'price', 'stock', 'weight', 'otherInfo', 'image','cat_id']
 
 admin.site.register(Products, ProductAdmin)
 
