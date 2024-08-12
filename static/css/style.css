@@ -1660,6 +1660,15 @@ ol {
 	margin-right: 0;
 }
 
+.qty-btn-custom{
+	width: 24px;
+    font-size: 16px;
+    color: #000000;
+	background-color: #b9b9b9;
+    cursor: pointer;
+    display: inline-block;
+}
+
 /*---------------------
   Shop Details
 -----------------------*/
