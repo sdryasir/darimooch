@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'carousel',
     'categories',
     'cart',
+    'users',
 ]
 
 MIDDLEWARE = [

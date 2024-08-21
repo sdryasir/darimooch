@@ -5,7 +5,7 @@ from carousel.models import Carousel
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login as user_login, logout
 from django.contrib.auth.decorators import login_required
-
+from users.forms import CustomUserForm
 from django.core.paginator import Paginator
 from django.contrib import messages
 from cart.cart import Cart
@@ -48,7 +48,37 @@ def cart_clear(request):
 
 @login_required(login_url="login")
 def cart_detail(request):
-    return render(request, 'cart_detail.html')
+    cart = Cart(request)
+    
+    
+    items = list(cart.session.values())[3]
+
+
+    subtotal=0
+    for item in items:
+        subtotal = subtotal+int(items[item]['price'])*int(items[item]['quantity'])
+    
+    aftertax = subtotal*2/100
+    
+    return render(request, 'cart_detail.html', {"subtotal":subtotal, "afterTax":aftertax})
+
+
+def checkout(request):
+    cart = Cart(request)
+    items = list(cart.session.values())[3]
+    subtotal=0
+    for item in items:
+        subtotal = subtotal+int(items[item]['price'])*int(items[item]['quantity'])
+
+    if request.method == 'POST':
+        form = CustomUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+    else:
+        form = CustomUserForm()
+    
+    aftertax = subtotal*2/100
+    return render(request, 'checkout.html', {"subtotal":subtotal, "afterTax":aftertax, "form":form})
 
 
 

@@ -1669,6 +1669,10 @@ ol {
     display: inline-block;
 }
 
+.errorlist li{
+	color: red!important;
+}
+
 /*---------------------
   Shop Details
 -----------------------*/
